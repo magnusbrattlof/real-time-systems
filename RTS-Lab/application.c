@@ -6,6 +6,9 @@
 
 int freqind[32] = {0, 2, 4, 0, 0, 2, 4, 0, 4, 5, 7, 4, 5, 7, 7, 9, 7, 5, 4, 0, 7, 9, 7, 5, 4, 0, 0, -5, 0, 0, -5, 0}
 int periodsforkey0[32] = {1136,1012,902,1136,1136,1012,902,1136,902,851,758,902,851,758,758,675,758,851,902,1136,758,675,758,851,902,1136,1136,1517,1136,1136,1517,1136};
+int periods[25] = {2024, 1908, 1805, 1701, 1608, 1515, 1433, 1351, 1276, 1205, 1136, 1073, 1012, 956, 903, 852, 804, 759, 716, 676, 638, 602, 568, 536, 506}
+
+void print_periods(int key);
 
 typedef struct {
     Object super;
@@ -38,25 +41,25 @@ void reader(App *self, int c) {
     SCI_WRITE(&sci0, "Rcv: \'");
 	SCI_WRITECHAR(&sci0, c);
 	if(c == 'e'){
-		
+
 		self->inpStr[self->count] = '\0';
 		self->myNum = atoi(self->inpStr);
 		self->runSum = self->runSum + self->myNum;
-		snprintf(self->bufNum, 50, "%d\n", self->myNum); 
+		snprintf(self->bufNum, 50, "%d\n", self->myNum);
 		snprintf(self->bufSum, 50, "%d\n", self->runSum);
 
 		SCI_WRITE(&sci0, "\n");
-		
+
 		SCI_WRITE(&sci0,"The entered number is: ");
 		SCI_WRITE(&sci0, self->bufNum);
 		SCI_WRITE(&sci0,"\n");
-		
+
 		SCI_WRITE(&sci0,"The running number is: ");
 		SCI_WRITE(&sci0,self->bufSum);
 		SCI_WRITE(&sci0,"\n");
 		self->count = 0;
 		}
-		
+
 	else if(c == 'F'){
 		self->runSum = 0;
 		SCI_WRITE(&sci0, "<The running sum is 0\n");
@@ -69,8 +72,13 @@ void reader(App *self, int c) {
 }
 
 /**********************************FUNCTION TO PRINT PERIODS****************************/
-void printperiod(){
+void print_periods(int key) {
+	int i, j;
+
+	for(i = 0; i <= 31; i++) {
+		printf("%d\n", periods[freqind[i] + 10]);
 	}
+}
 
 void startApp(App *self, int arg) {
     CANMsg msg;
