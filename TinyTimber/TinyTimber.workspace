@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="TinyTimber" Database="" Version="10.0.0">
-  <Project Name="RTS-Lab" Path="../../Downloads/RTS-Lab/RTS-Lab.project" Active="Yes"/>
+  <Project Name="RTS-Lab" Path="../RTS-Lab/RTS-Lab.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="RTS-Lab" ConfigName="Debug"/>
+      <Project Name="RTS-Lab" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
+      <Project Name="RTS-Lab" ConfigName="Release"/>
       <Project Name="RTS-Lab" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>

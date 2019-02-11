@@ -4,9 +4,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int freqind[32] = {0, 2, 4, 0, 0, 2, 4, 0, 4, 5, 7, 4, 5, 7, 7, 9, 7, 5, 4, 0, 7, 9, 7, 5, 4, 0, 0, -5, 0, 0, -5, 0}
-int periodsforkey0[32] = {1136,1012,902,1136,1136,1012,902,1136,902,851,758,902,851,758,758,675,758,851,902,1136,758,675,758,851,902,1136,1136,1517,1136,1136,1517,1136};
-int periods[25] = {2024, 1908, 1805, 1701, 1608, 1515, 1433, 1351, 1276, 1205, 1136, 1073, 1012, 956, 903, 852, 804, 759, 716, 676, 638, 602, 568, 536, 506}
+
+char *DAC_OUTPUT = (char *) 0x4000741C;
+
+int freqind[32] = {0, 2, 4, 0, 0, 2, 4, 0, 4, 5, 7, 4, 5, 7, 7, 9, 7, 5, 4, 0, 7, 9, 7, 5, 4, 0, 0, -5, 0, 0, -5, 0};
+int periods[25] = {2024, 1908, 1805, 1701, 1608, 1515, 1433, 1351, 1276, 1205, 1136, 1073, 1012, 956, 903, 852, 804, 759, 716, 676, 638, 602, 568, 536, 506};
 
 void print_periods(int key);
 
@@ -21,8 +23,25 @@ typedef struct {
 	char bufSum[50];
 } App;
 
-App app = { initObject(), 0, 0, 0, '\0' };
+typedef struct {
+	Object super;
+	int period;
+	int volume;
+	int mute;
+	int background_loop_range;
+	int deadline;
+	int enable;
+} Sound;
 
+App app = { initObject(), 0, 0, 0, '\0' };
+Sound s = { initObject(), 500, 5, 0, 0, 1 };
+Sound b = { initObject(), 1300, 5, 0, 0, 1300, 1 };
+
+void tone_generator(Sound *self, int unused);
+void background_generator(Sound *self, int unused);
+void load_control(Sound *self, char inp);
+void deadline_control(Sound *self, char inp);
+void volume_control(Sound *self, char inp);
 void reader(App*, int);
 void receiver(App*, int);
 
@@ -38,7 +57,7 @@ void receiver(App *self, int unused) {
 }
 
 void reader(App *self, int c) {
-    SCI_WRITE(&sci0, "Rcv: \'");
+    //SCI_WRITE(&sci0, "Rcv: \'");
 	SCI_WRITECHAR(&sci0, c);
 	if(c == 'e'){
 
@@ -54,31 +73,126 @@ void reader(App *self, int c) {
 		SCI_WRITE(&sci0, self->bufNum);
 		SCI_WRITE(&sci0,"\n");
 
-		SCI_WRITE(&sci0,"The running number is: ");
+		//SCI_WRITE(&sci0,"The running number is: ");
 		SCI_WRITE(&sci0,self->bufSum);
-		SCI_WRITE(&sci0,"\n");
+		//SCI_WRITE(&sci0,"\n");
+		
+		int key = atoi(self->bufSum);
+		print_periods(key);
 		self->count = 0;
 		}
-
+    
 	else if(c == 'F'){
 		self->runSum = 0;
 		SCI_WRITE(&sci0, "<The running sum is 0\n");
 		}
+	else if(c == 'u' || c == 'd' || c == 'm'){
+		volume_control(&s,c);
+		}
+		
+	else if(c == 'b' || c == 'v') {
+		load_control(&b, c);
+		}
+
 	else{
 		self->inpStr[self->count] = c;
-		SCI_WRITE(&sci0, "\'\n");
+		//SCI_WRITE(&sci0, "\'\n");
 		self->count++;
 		}
 }
 
+void volume_control(Sound *self, char inp) {
+	switch(inp){
+		case 'u':
+			if(self->volume<20)
+				self->volume += 1;
+			break;
+
+		case 'd':
+			if(self->volume>5)
+				self->volume -= 1;
+			break;
+		
+		case 'm':
+			if(!self->volume)
+				self->volume = 5;
+			else
+				self->volume = 0;
+			break;
+		
+		default:
+			SCI_WRITE(&sci0, "Enter another character.\n");
+		}
+	}
+
+void load_control(Sound *self, char inp) {
+	char new_blr[100];
+	switch(inp) {
+		case 'b':
+			self->background_loop_range += 500;
+			snprintf(new_blr, 50, "%d\n", self->background_loop_range);
+			SCI_WRITE(&sci0, new_blr);
+			SCI_WRITE(&sci0, "\n");
+			break;
+
+		case 'v':
+			self->background_loop_range -= 500;
+			snprintf(new_blr, 50, "%d\n", self->background_loop_range);
+			SCI_WRITE(&sci0, new_blr);
+			SCI_WRITE(&sci0, "\n");
+			break;
+		
+		default:
+			SCI_WRITE(&sci0, "Enter another character.\n");
+		}
+	}
+
+void deadline_control(Sound *self, int enable){
+	if(enable)
+		self->deadline = 100;
+	else
+		self->volume = 0;
+}
+
+void tone_generator(Sound *self, int unused) {
+	if(*DAC_OUTPUT) {
+		*DAC_OUTPUT = 0;
+	} 
+	else {
+		*DAC_OUTPUT = self->volume;
+	}
+	
+	SEND(USEC(self->period), USEC(self->deadline), self, tone_generator, 0);
+}
+
+void background_generator(Sound *self, int unused) {
+	for(int i = 0; i <= self->background_loop_range; i++) {
+		
+	}
+	AFTER(USEC(self->period), USEC(self->deadline), self, background_generator, 0);
+}
+
 /**********************************FUNCTION TO PRINT PERIODS****************************/
 void print_periods(int key) {
-	int i, j;
+
+	int i;
+	int new_num;
+	char number[50];
+	char bufIndex[50];
+	key += 10;
 
 	for(i = 0; i <= 31; i++) {
-		printf("%d\n", periods[freqind[i] + 10]);
+		new_num = periods[freqind[i] + key];
+		snprintf(number, 50, "%d\t", new_num);
+		snprintf(bufIndex, 50, "%d\n", freqind[i]);
+		
+		SCI_WRITE(&sci0, bufIndex);
+		SCI_WRITE(&sci0,  number);
+	
 	}
 }
+
+
 
 void startApp(App *self, int arg) {
     CANMsg msg;
@@ -86,6 +200,10 @@ void startApp(App *self, int arg) {
     CAN_INIT(&can0);
     SCI_INIT(&sci0);
     SCI_WRITE(&sci0, "Hello, hello...\n");
+	
+	
+	tone_generator(&s, 0);
+	background_generator(&b, 0);
 
     msg.msgId = 1;
     msg.nodeId = 1;
