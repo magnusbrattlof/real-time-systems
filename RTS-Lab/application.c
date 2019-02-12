@@ -10,8 +10,6 @@ char *DAC_OUTPUT = (char *) 0x4000741C;
 int freqind[32] = {0, 2, 4, 0, 0, 2, 4, 0, 4, 5, 7, 4, 5, 7, 7, 9, 7, 5, 4, 0, 7, 9, 7, 5, 4, 0, 0, -5, 0, 0, -5, 0};
 int periods[25] = {2024, 1908, 1805, 1701, 1608, 1515, 1433, 1351, 1276, 1205, 1136, 1073, 1012, 956, 903, 852, 804, 759, 716, 676, 638, 602, 568, 536, 506};
 
-void print_periods(int key);
-
 typedef struct {
     Object super;
     int count;
@@ -41,8 +39,9 @@ Sound b = { initObject(), 1300, 5, 0, 1000, 1300, 1300 };
 void tone_generator(Sound *self, int unused);
 void background_generator(Sound *self, int unused);
 void load_control(Sound *self, char inp);
-void deadline_control(Sound *self, char input);
+void deadline_control(Sound *self, char unused);
 void volume_control(Sound *self, char inp);
+void print_periods(int key);
 void reader(App*, int);
 void receiver(App*, int);
 
@@ -88,32 +87,37 @@ void reader(App *self, int c) {
 		SCI_WRITE(&sci0, "<The running sum is 0\n");
 	}
 	else if(c == 'u' || c == 'd' || c == 'm') {
-		volume_control(&s,c);
+		volume_control(&s, c);
 	}
 
 	else if(c == 'b' || c == 'v') {
 		load_control(&b, c);
 	}
+    else if (c == 'd') {
+        deadline_control(&s, c);
+        deadline_control(&b, c);
+    }
 
 	else {
 		self->inpStr[self->count] = c;
-		//SCI_WRITE(&sci0, "\'\n");
 		self->count++;
 	}
 }
 
 void volume_control(Sound *self, char inp) {
+
 	switch(inp){
+        // UP - increment the volume by one
 		case 'u':
 			if(self->volume < 20)
 				self->volume += 1;
 			break;
-
+        // DOWN - decrement the volume by one
 		case 'd':
 			if(self->volume > 5)
 				self->volume -= 1;
 			break;
-
+        // MUTE or UNMUTE - mute the sound
 		case 'm':
 			if(!self->volume)
 				self->volume = 5;
@@ -130,14 +134,14 @@ void load_control(Sound *self, char inp) {
 	char new_blr[50];
 
     switch(inp) {
-
+        // Increases the background_loop with 500
 		case 'b':
 			self->background_loop_range += 500;
 			snprintf(new_blr, 50, "%d\n", self->background_loop_range);
 			SCI_WRITE(&sci0, new_blr);
 			SCI_WRITE(&sci0, "\n");
 			break;
-
+        // Decreases the background_loop with 500
 		case 'v':
 			self->background_loop_range -= 500;
 			snprintf(new_blr, 50, "%d\n", self->background_loop_range);
@@ -150,7 +154,7 @@ void load_control(Sound *self, char inp) {
 		}
 	}
 
-void deadline_control(Sound *self, int input) {
+void deadline_control(Sound *self, int unused) {
 	if(self->deadline) {
         self->deadline = 0;
     }
@@ -174,8 +178,40 @@ void background_generator(Sound *self, int unused) {
 	for(int i = 0; i <= self->background_loop_range; i++) {
 
 	}
-	AFTER(USEC(self->period), USEC(self->deadline), self, background_generator, 0);
+	SEND(USEC(self->period), USEC(self->deadline), self, background_generator, 0);
 }
+
+void benchmark_background() {
+    int i, j;
+    Time t1, t2, result;
+    Time max = 0;
+    Time average = 0;
+
+    for(i = 0; i < 500; i++) {
+        t1 = CURRENT_OFFSET();
+        for(j = 0; j < 1000; j++) {
+            // EMPTY LOOP
+        }
+        t2 = CURRENT_OFFSET();
+        result = t2 - t1;
+        average += result;
+
+        if(result > max) {
+            max = result;
+        }
+    }
+    average = average / 500;
+    
+}
+
+void benchmark_tone() {
+    int i;
+    for(i = 0; i < 500; i++) {
+
+    }
+}
+
+
 
 void print_periods(int key) {
 
