@@ -9,11 +9,11 @@ void print_periods(int key);
 void print_periods(int key) {
 	int real_key = key;
 	printf("For key: %d: \n", key);
-	printf("Note:\tPeriod:\n");
+	printf("Frequency index:\tPeriod:\n");
 	int i, j;
 	key += 10;
 	for(i = 0; i <= 31; i++) {
-		printf("%d\t%d\n",freqind[i]+ real_key, periods[freqind[i] + key]);
+		printf("%d\t%d\n",freqind[i] + real_key, periods[freqind[i] + key]);
 	}
 }
 

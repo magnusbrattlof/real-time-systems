@@ -28,19 +28,20 @@ typedef struct {
 	int period;
 	int volume;
 	int mute;
-	int background_loop_range;
-	int deadline;
-	int enable;
+    int background_loop_range;
+    int deadline;
+    int const_deadline;
 } Sound;
 
 App app = { initObject(), 0, 0, 0, '\0' };
-Sound s = { initObject(), 500, 5, 0, 0, 1 };
-Sound b = { initObject(), 1300, 5, 0, 0, 1300, 1 };
+
+Sound s = { initObject(), 500, 5, 0, 0, 100, 100 };
+Sound b = { initObject(), 1300, 5, 0, 1000, 1300, 1300 };
 
 void tone_generator(Sound *self, int unused);
 void background_generator(Sound *self, int unused);
 void load_control(Sound *self, char inp);
-void deadline_control(Sound *self, char inp);
+void deadline_control(Sound *self, char input);
 void volume_control(Sound *self, char inp);
 void reader(App*, int);
 void receiver(App*, int);
@@ -76,58 +77,60 @@ void reader(App *self, int c) {
 		//SCI_WRITE(&sci0,"The running number is: ");
 		SCI_WRITE(&sci0,self->bufSum);
 		//SCI_WRITE(&sci0,"\n");
-		
+
 		int key = atoi(self->bufSum);
 		print_periods(key);
 		self->count = 0;
-		}
-    
-	else if(c == 'F'){
+	}
+
+	else if(c == 'F') {
 		self->runSum = 0;
 		SCI_WRITE(&sci0, "<The running sum is 0\n");
-		}
-	else if(c == 'u' || c == 'd' || c == 'm'){
+	}
+	else if(c == 'u' || c == 'd' || c == 'm') {
 		volume_control(&s,c);
-		}
-		
+	}
+
 	else if(c == 'b' || c == 'v') {
 		load_control(&b, c);
-		}
+	}
 
-	else{
+	else {
 		self->inpStr[self->count] = c;
 		//SCI_WRITE(&sci0, "\'\n");
 		self->count++;
-		}
+	}
 }
 
 void volume_control(Sound *self, char inp) {
 	switch(inp){
 		case 'u':
-			if(self->volume<20)
+			if(self->volume < 20)
 				self->volume += 1;
 			break;
 
 		case 'd':
-			if(self->volume>5)
+			if(self->volume > 5)
 				self->volume -= 1;
 			break;
-		
+
 		case 'm':
 			if(!self->volume)
 				self->volume = 5;
 			else
 				self->volume = 0;
 			break;
-		
+
 		default:
 			SCI_WRITE(&sci0, "Enter another character.\n");
 		}
 	}
 
 void load_control(Sound *self, char inp) {
-	char new_blr[100];
-	switch(inp) {
+	char new_blr[50];
+
+    switch(inp) {
+
 		case 'b':
 			self->background_loop_range += 500;
 			snprintf(new_blr, 50, "%d\n", self->background_loop_range);
@@ -141,38 +144,39 @@ void load_control(Sound *self, char inp) {
 			SCI_WRITE(&sci0, new_blr);
 			SCI_WRITE(&sci0, "\n");
 			break;
-		
+
 		default:
 			SCI_WRITE(&sci0, "Enter another character.\n");
 		}
 	}
 
-void deadline_control(Sound *self, int enable){
-	if(enable)
-		self->deadline = 100;
-	else
-		self->volume = 0;
+void deadline_control(Sound *self, int input) {
+	if(self->deadline) {
+        self->deadline = 0;
+    }
+	else {
+        self->deadline = self->const_deadline;
+    }
 }
 
 void tone_generator(Sound *self, int unused) {
 	if(*DAC_OUTPUT) {
 		*DAC_OUTPUT = 0;
-	} 
+	}
 	else {
 		*DAC_OUTPUT = self->volume;
 	}
-	
+
 	SEND(USEC(self->period), USEC(self->deadline), self, tone_generator, 0);
 }
 
 void background_generator(Sound *self, int unused) {
 	for(int i = 0; i <= self->background_loop_range; i++) {
-		
+
 	}
 	AFTER(USEC(self->period), USEC(self->deadline), self, background_generator, 0);
 }
 
-/**********************************FUNCTION TO PRINT PERIODS****************************/
 void print_periods(int key) {
 
 	int i;
@@ -185,14 +189,12 @@ void print_periods(int key) {
 		new_num = periods[freqind[i] + key];
 		snprintf(number, 50, "%d\t", new_num);
 		snprintf(bufIndex, 50, "%d\n", freqind[i]);
-		
+
 		SCI_WRITE(&sci0, bufIndex);
 		SCI_WRITE(&sci0,  number);
-	
+
 	}
 }
-
-
 
 void startApp(App *self, int arg) {
     CANMsg msg;
@@ -200,8 +202,8 @@ void startApp(App *self, int arg) {
     CAN_INIT(&can0);
     SCI_INIT(&sci0);
     SCI_WRITE(&sci0, "Hello, hello...\n");
-	
-	
+
+
 	tone_generator(&s, 0);
 	background_generator(&b, 0);
 
