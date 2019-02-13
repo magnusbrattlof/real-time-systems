@@ -9,6 +9,7 @@ char *DAC_OUTPUT = (char *) 0x4000741C;
 
 int freqind[32] = {0, 2, 4, 0, 0, 2, 4, 0, 4, 5, 7, 4, 5, 7, 7, 9, 7, 5, 4, 0, 7, 9, 7, 5, 4, 0, 0, -5, 0, 0, -5, 0};
 int periods[25] = {2024, 1908, 1805, 1701, 1608, 1515, 1433, 1351, 1276, 1205, 1136, 1073, 1012, 956, 903, 852, 804, 759, 716, 676, 638, 602, 568, 536, 506};
+int beats[32] = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 1000, 500, 500, 1000, 250, 250, 250, 250, 500, 500, 250, 250, 250, 250, 500, 500, 500, 500, 1000, 500, 500, 1000};
 
 typedef struct {
     Object super;
@@ -29,17 +30,24 @@ typedef struct {
     int background_loop_range;
     int deadline;
     int const_deadline;
+	int killed;
 } Sound;
+
+typedef struct {
+	Object super;
+	int key;
+} Melody;
 
 App app = { initObject(), 0, 0, 0, '\0' };
 
-Sound s = { initObject(), 500, 5, 0, 0, 100, 100 };
+Sound s = { initObject(), 1136, 5, 0, 0, 100, 100, 0 };
 Sound b = { initObject(), 1300, 5, 0, 1000, 1300, 1300 };
+Melody m = { initObject(), 0 };
 
 void tone_generator(Sound *self, int unused);
 void background_generator(Sound *self, int unused);
 void load_control(Sound *self, char inp);
-void deadline_control(Sound *self, char unused);
+void deadline_control(Sound *self, int unused);
 void volume_control(Sound *self, char inp);
 void print_periods(int key);
 void reader(App*, int);
@@ -93,7 +101,7 @@ void reader(App *self, int c) {
 	else if(c == 'b' || c == 'v') {
 		load_control(&b, c);
 	}
-    else if (c == 'd') {
+    else if (c == 'x') {
         deadline_control(&s, c);
         deadline_control(&b, c);
     }
@@ -128,7 +136,7 @@ void volume_control(Sound *self, char inp) {
 		default:
 			SCI_WRITE(&sci0, "Enter another character.\n");
 		}
-	}
+}
 
 void load_control(Sound *self, char inp) {
 	char new_blr[50];
@@ -151,8 +159,8 @@ void load_control(Sound *self, char inp) {
 
 		default:
 			SCI_WRITE(&sci0, "Enter another character.\n");
-		}
 	}
+}
 
 void deadline_control(Sound *self, int unused) {
 	if(self->deadline) {
@@ -163,16 +171,7 @@ void deadline_control(Sound *self, int unused) {
     }
 }
 
-void tone_generator(Sound *self, int unused) {
-	if(*DAC_OUTPUT) {
-		*DAC_OUTPUT = 0;
-	}
-	else {
-		*DAC_OUTPUT = self->volume;
-	}
 
-	SEND(USEC(self->period), USEC(self->deadline), self, tone_generator, 0);
-}
 
 void background_generator(Sound *self, int unused) {
 	for(int i = 0; i <= self->background_loop_range; i++) {
@@ -189,7 +188,7 @@ void benchmark_background() {
 
     for(i = 0; i < 500; i++) {
         t1 = CURRENT_OFFSET();
-        for(j = 0; j < 1000; j++) {
+        for(j = 0; j < 12500; j++) {
             // EMPTY LOOP
         }
         t2 = CURRENT_OFFSET();
@@ -201,16 +200,44 @@ void benchmark_background() {
         }
     }
     average = average / 500;
-    
+	
+	char avBuf[50], maxBuf[50];
+	snprintf(avBuf, 50, "%ld\n", USEC_OF(average));
+    snprintf(maxBuf, 50, "%ld\n", USEC_OF(max));
+	SCI_WRITE(&sci0, avBuf);
+	SCI_WRITE(&sci0, maxBuf);
+	
 }
 
 void benchmark_tone() {
-    int i;
+    int i, j;
+	Time t1, t2, result;
+	Time max = 0;
+    Time average = 0;
     for(i = 0; i < 500; i++) {
-
+		t1 = CURRENT_OFFSET();
+		for(j = 0; j < 1000; j++) {
+			if(*DAC_OUTPUT) {
+				*DAC_OUTPUT = 0;
+			}
+			else {
+				*DAC_OUTPUT = 5;
+			}
+		}
+		t2 = CURRENT_OFFSET();
+		result = t2 - t1;
+		average += result;
+		if(result > max) 
+			max = result;
     }
+	average = average / 500;
+	
+	char avBuf[50], maxBuf[50];
+	snprintf(avBuf, 50, "%ld\n", USEC_OF(average));
+    snprintf(maxBuf, 50, "%ld\n", USEC_OF(max));
+	SCI_WRITE(&sci0, avBuf);
+	SCI_WRITE(&sci0, maxBuf);
 }
-
 
 
 void print_periods(int key) {
@@ -232,6 +259,45 @@ void print_periods(int key) {
 	}
 }
 
+void tone_generator(Sound *self, int unused) {
+	if(!self->killed) {
+		if(*DAC_OUTPUT) {
+			*DAC_OUTPUT = 0;
+		}
+		else {
+			*DAC_OUTPUT = self->volume;
+		}
+	}
+
+	AFTER(USEC(self->period), self, tone_generator, 0);
+}
+
+void kill_tone(Sound *self, int unused) {
+	if(self->killed) {
+		self->killed = 0;
+	}
+	else {
+		self->killed = 1;
+	}
+}
+
+void melody_player(Melody *self, int unused) {
+
+	int i;
+	//self->key += 10;
+
+	for(i = 0; i <= 31; i++) {
+		
+		ASYNC(&s, tone_generator, 0);
+		
+		AFTER(MSEC(beats[i] - 50), &s, kill_tone, 0);		
+		AFTER(MSEC(beats[i]), self, melody_player, 0);
+		
+		
+		//periods[freqind[i] + self->key]
+	}
+}
+
 void startApp(App *self, int arg) {
     CANMsg msg;
 
@@ -240,9 +306,8 @@ void startApp(App *self, int arg) {
     SCI_WRITE(&sci0, "Hello, hello...\n");
 
 
-	tone_generator(&s, 0);
-	background_generator(&b, 0);
-
+	melody_player(&m, 0);
+	
     msg.msgId = 1;
     msg.nodeId = 1;
     msg.length = 6;

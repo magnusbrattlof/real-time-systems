@@ -89,7 +89,7 @@ LOAD c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v
 LOAD c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a
 END GROUP
 
-.text           0x20000000     0x7e38
+.text           0x20000000     0x8170
                 0x20000000                . = ALIGN (0x4)
  *(.start_section)
  .start_section
@@ -346,365 +346,372 @@ END GROUP
                 0x20004fd0                USART_ClearFlag
                 0x20004ff2                USART_GetITStatus
                 0x200050a8                USART_ClearITPendingBit
- .text          0x200050e4      0x4fc ./Debug/application.c.o
+ .text          0x200050e4      0x834 ./Debug/application.c.o
                 0x200050e4                receiver
                 0x20005134                reader
-                0x20005294                volume_control
-                0x20005318                load_control
-                0x200053c8                tone_generator
-                0x20005424                background_generator
-                0x20005474                print_periods
-                0x20005508                startApp
-                0x200055a0                main
- .text          0x200055e0      0x434 ./Debug/canTinyTimber.c.o
-                0x20005668                can_init
-                0x20005720                can_interrupt
-                0x200058a8                can_receive
-                0x20005972                can_send
- .text          0x20005a14      0x294 ./Debug/sciTinyTimber.c.o
-                0x20005a9c                sci_init
-                0x20005b42                sci_write
-                0x20005b96                sci_writechar
-                0x20005bcc                sci_interrupt
- .text          0x20005ca8      0x154 ./Debug/driver_src_stm32f4xx_syscfg.c.o
-                0x20005ca8                SYSCFG_DeInit
-                0x20005cc4                SYSCFG_MemoryRemapConfig
-                0x20005ce4                SYSCFG_MemorySwappingBank
-                0x20005d04                SYSCFG_EXTILineConfig
-                0x20005d88                SYSCFG_ETH_MediaInterfaceConfig
-                0x20005da8                SYSCFG_CompensationCellCmd
-                0x20005dc8                SYSCFG_GetCompensationCellStatus
- .text          0x20005dfc      0xfd8 ./Debug/driver_src_stm32f4xx_can.c.o
-                0x20005dfc                CAN_DeInit
-                0x20005e44                CAN_Init
-                0x20005fe6                CAN_FilterInit
-                0x2000616c                CAN_StructInit
-                0x200061c2                CAN_SlaveStartBank
-                0x20006224                CAN_DBGFreeze
-                0x2000625c                CAN_TTComModeCmd
-                0x200062f4                CAN_Transmit
-                0x20006496                CAN_TransmitStatus
-                0x2000656c                CAN_CancelTransmit
-                0x200065be                CAN_Receive
-                0x2000673a                CAN_FIFORelease
-                0x20006772                CAN_MessagePending
-                0x200067bc                CAN_OperatingModeRequest
-                0x200068b8                CAN_Sleep
-                0x200068f2                CAN_WakeUp
-                0x20006948                CAN_GetLastErrorCode
-                0x2000696e                CAN_GetReceiveErrorCounter
-                0x20006990                CAN_GetLSBTransmitErrorCounter
-                0x200069b2                CAN_ITConfig
-                0x200069ee                CAN_GetFlagStatus
-                0x20006abc                CAN_ClearFlag
-                0x20006b30                CAN_GetITStatus
-                0x20006cc4                CAN_ClearITPendingBit
- .text          0x20006dd4        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
- .text          0x20006dd4        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
- .text          0x20006dd4        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
- .text          0x20006dd4        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
- .text          0x20006dd4        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
- .text          0x20006dd4        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
- .text          0x20006dd4        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
- .text          0x20006dd4        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
- .text          0x20006dd4       0x14 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strcmp.o)
-                0x20006dd4                strcmp
- .text          0x20006de8        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
- .text          0x20006de8        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-ctype_.o)
- *fill*         0x20006de8        0x8 
- .text          0x20006df0       0xa0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memchr.o)
-                0x20006df0                memchr
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
- .text          0x20006e90        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
+                0x200052ac                volume_control
+                0x20005330                load_control
+                0x200053e0                deadline_control
+                0x2000540e                background_generator
+                0x2000546c                benchmark_background
+                0x20005578                benchmark_tone
+                0x200056a4                print_periods
+                0x20005738                tone_generator
+                0x2000579c                kill_tone
+                0x200057c8                melody_player
+                0x2000584c                startApp
+                0x200058d8                main
+ .text          0x20005918      0x434 ./Debug/canTinyTimber.c.o
+                0x200059a0                can_init
+                0x20005a58                can_interrupt
+                0x20005be0                can_receive
+                0x20005caa                can_send
+ .text          0x20005d4c      0x294 ./Debug/sciTinyTimber.c.o
+                0x20005dd4                sci_init
+                0x20005e7a                sci_write
+                0x20005ece                sci_writechar
+                0x20005f04                sci_interrupt
+ .text          0x20005fe0      0x154 ./Debug/driver_src_stm32f4xx_syscfg.c.o
+                0x20005fe0                SYSCFG_DeInit
+                0x20005ffc                SYSCFG_MemoryRemapConfig
+                0x2000601c                SYSCFG_MemorySwappingBank
+                0x2000603c                SYSCFG_EXTILineConfig
+                0x200060c0                SYSCFG_ETH_MediaInterfaceConfig
+                0x200060e0                SYSCFG_CompensationCellCmd
+                0x20006100                SYSCFG_GetCompensationCellStatus
+ .text          0x20006134      0xfd8 ./Debug/driver_src_stm32f4xx_can.c.o
+                0x20006134                CAN_DeInit
+                0x2000617c                CAN_Init
+                0x2000631e                CAN_FilterInit
+                0x200064a4                CAN_StructInit
+                0x200064fa                CAN_SlaveStartBank
+                0x2000655c                CAN_DBGFreeze
+                0x20006594                CAN_TTComModeCmd
+                0x2000662c                CAN_Transmit
+                0x200067ce                CAN_TransmitStatus
+                0x200068a4                CAN_CancelTransmit
+                0x200068f6                CAN_Receive
+                0x20006a72                CAN_FIFORelease
+                0x20006aaa                CAN_MessagePending
+                0x20006af4                CAN_OperatingModeRequest
+                0x20006bf0                CAN_Sleep
+                0x20006c2a                CAN_WakeUp
+                0x20006c80                CAN_GetLastErrorCode
+                0x20006ca6                CAN_GetReceiveErrorCounter
+                0x20006cc8                CAN_GetLSBTransmitErrorCounter
+                0x20006cea                CAN_ITConfig
+                0x20006d26                CAN_GetFlagStatus
+                0x20006df4                CAN_ClearFlag
+                0x20006e68                CAN_GetITStatus
+                0x20006ffc                CAN_ClearITPendingBit
+ .text          0x2000710c        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
+ .text          0x2000710c        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
+ .text          0x2000710c        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
+ .text          0x2000710c        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
+ .text          0x2000710c        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+ .text          0x2000710c        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
+ .text          0x2000710c        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
+ .text          0x2000710c        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .text          0x2000710c       0x14 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strcmp.o)
+                0x2000710c                strcmp
+ .text          0x20007120        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
+ .text          0x20007120        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-ctype_.o)
+ .text          0x20007120       0xa0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memchr.o)
+                0x20007120                memchr
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
+ .text          0x200071c0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
  *(.text.*)
- .text.atoi     0x20006e90        0x8 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
-                0x20006e90                atoi
- .text._atoi_r  0x20006e98        0x8 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
-                0x20006e98                _atoi_r
+ .text.atoi     0x200071c0        0x8 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
+                0x200071c0                atoi
+ .text._atoi_r  0x200071c8        0x8 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
+                0x200071c8                _atoi_r
  .text._snprintf_r
-                0x20006ea0       0x5e c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
-                0x20006ea0                _snprintf_r
-                0x20006ea0                _sniprintf_r
- *fill*         0x20006efe        0x2 
+                0x200071d0       0x5e c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
+                0x200071d0                _snprintf_r
+                0x200071d0                _sniprintf_r
+ *fill*         0x2000722e        0x2 
  .text.snprintf
-                0x20006f00       0x68 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
-                0x20006f00                sniprintf
-                0x20006f00                snprintf
+                0x20007230       0x68 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
+                0x20007230                sniprintf
+                0x20007230                snprintf
  .text._strtol_l.isra.0
-                0x20006f68       0xf6 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
- *fill*         0x2000705e        0x2 
+                0x20007298       0xf6 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
+ *fill*         0x2000738e        0x2 
  .text._strtol_r
-                0x20007060       0x24 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
-                0x20007060                _strtol_r
+                0x20007390       0x24 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
+                0x20007390                _strtol_r
  .text.strtol_l
-                0x20007084       0x1c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
-                0x20007084                strtol_l
- .text.strtol   0x200070a0       0x2c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
-                0x200070a0                strtol
+                0x200073b4       0x1c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
+                0x200073b4                strtol_l
+ .text.strtol   0x200073d0       0x2c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
+                0x200073d0                strtol
  .text._setlocale_r
-                0x200070cc       0x38 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
-                0x200070cc                _setlocale_r
+                0x200073fc       0x38 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x200073fc                _setlocale_r
  .text.__locale_mb_cur_max
-                0x20007104       0x1c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
-                0x20007104                __locale_mb_cur_max
+                0x20007434       0x1c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x20007434                __locale_mb_cur_max
  .text.__locale_ctype_ptr_l
-                0x20007120        0x6 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
-                0x20007120                __locale_ctype_ptr_l
- *fill*         0x20007126        0x2 
+                0x20007450        0x6 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x20007450                __locale_ctype_ptr_l
+ *fill*         0x20007456        0x2 
  .text.__locale_ctype_ptr
-                0x20007128       0x1c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
-                0x20007128                __locale_ctype_ptr
+                0x20007458       0x1c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x20007458                __locale_ctype_ptr
  .text.setlocale
-                0x20007144       0x10 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
-                0x20007144                setlocale
+                0x20007474       0x10 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x20007474                setlocale
  .text._mbtowc_r
-                0x20007154       0x24 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
-                0x20007154                _mbtowc_r
+                0x20007484       0x24 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
+                0x20007484                _mbtowc_r
  .text.__ascii_mbtowc
-                0x20007178       0x24 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
-                0x20007178                __ascii_mbtowc
+                0x200074a8       0x24 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
+                0x200074a8                __ascii_mbtowc
  .text.__ssputs_r
-                0x2000719c       0xb4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
-                0x2000719c                __ssputs_r
+                0x200074cc       0xb4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
+                0x200074cc                __ssputs_r
  .text.__ssprint_r
-                0x20007250       0xf0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
-                0x20007250                __ssprint_r
+                0x20007580       0xf0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
+                0x20007580                __ssprint_r
  .text._svfprintf_r
-                0x20007340      0x1ec c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
-                0x20007340                _svfiprintf_r
-                0x20007340                _svfprintf_r
+                0x20007670      0x1ec c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
+                0x20007670                _svfiprintf_r
+                0x20007670                _svfprintf_r
  .text._printf_common
-                0x2000752c       0xea c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x2000752c                _printf_common
- *fill*         0x20007616        0x2 
+                0x2000785c       0xea c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x2000785c                _printf_common
+ *fill*         0x20007946        0x2 
  .text._printf_i
-                0x20007618      0x224 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x20007618                _printf_i
+                0x20007948      0x224 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x20007948                _printf_i
  .text._wctomb_r
-                0x2000783c       0x24 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
-                0x2000783c                _wctomb_r
+                0x20007b6c       0x24 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
+                0x20007b6c                _wctomb_r
  .text.__ascii_wctomb
-                0x20007860       0x1a c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
-                0x20007860                __ascii_wctomb
- .text.memcpy   0x2000787a       0x16 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
-                0x2000787a                memcpy
- .text.memmove  0x20007890       0x32 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
-                0x20007890                memmove
- *fill*         0x200078c2        0x2 
- .text._free_r  0x200078c4       0x9c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
-                0x200078c4                _free_r
+                0x20007b90       0x1a c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
+                0x20007b90                __ascii_wctomb
+ .text.memcpy   0x20007baa       0x16 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+                0x20007baa                memcpy
+ .text.memmove  0x20007bc0       0x32 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
+                0x20007bc0                memmove
+ *fill*         0x20007bf2        0x2 
+ .text._free_r  0x20007bf4       0x9c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
+                0x20007bf4                _free_r
  .text._malloc_r
-                0x20007960       0xb4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
-                0x20007960                _malloc_r
+                0x20007c90       0xb4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+                0x20007c90                _malloc_r
  .text._realloc_r
-                0x20007a14       0x4c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
-                0x20007a14                _realloc_r
- .text._sbrk_r  0x20007a60       0x20 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
-                0x20007a60                _sbrk_r
+                0x20007d44       0x4c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
+                0x20007d44                _realloc_r
+ .text._sbrk_r  0x20007d90       0x20 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
+                0x20007d90                _sbrk_r
  .text.__malloc_lock
-                0x20007a80        0x2 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
-                0x20007a80                __malloc_lock
+                0x20007db0        0x2 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
+                0x20007db0                __malloc_lock
  .text.__malloc_unlock
-                0x20007a82        0x2 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
-                0x20007a82                __malloc_unlock
+                0x20007db2        0x2 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
+                0x20007db2                __malloc_unlock
  .text._malloc_usable_size_r
-                0x20007a84       0x10 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
-                0x20007a84                _malloc_usable_size_r
+                0x20007db4       0x10 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
+                0x20007db4                _malloc_usable_size_r
  .text.cleanup_glue
-                0x20007a94       0x1a c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
-                0x20007a94                cleanup_glue
- *fill*         0x20007aae        0x2 
+                0x20007dc4       0x1a c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
+                0x20007dc4                cleanup_glue
+ *fill*         0x20007dde        0x2 
  .text._reclaim_reent
-                0x20007ab0       0xb8 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
-                0x20007ab0                _reclaim_reent
+                0x20007de0       0xb8 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
+                0x20007de0                _reclaim_reent
  *(.rodata)
- .rodata        0x20007b68       0x7d ./Debug/TinyTimber.c.o
- *fill*         0x20007be5        0x3 
- .rodata        0x20007be8       0x7d ./Debug/application.c.o
- *fill*         0x20007c65        0x3 
- .rodata        0x20007c68       0x8a ./Debug/canTinyTimber.c.o
+ .rodata        0x20007e98       0x7d ./Debug/TinyTimber.c.o
+ *fill*         0x20007f15        0x3 
+ .rodata        0x20007f18       0x85 ./Debug/application.c.o
+ *fill*         0x20007f9d        0x3 
+ .rodata        0x20007fa0       0x8a ./Debug/canTinyTimber.c.o
  *(.rodata*)
- *fill*         0x20007cf2        0x2 
+ *fill*         0x2000802a        0x2 
  .rodata._global_impure_ptr
-                0x20007cf4        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
-                0x20007cf4                _global_impure_ptr
+                0x2000802c        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
+                0x2000802c                _global_impure_ptr
  .rodata._setlocale_r.str1.1
-                0x20007cf8        0x8 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x20008030        0x8 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
                                   0x9 (size before relaxing)
  .rodata.str1.1
-                0x20007d00        0x2 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x20008038        0x2 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
  .rodata._svfprintf_r.str1.1
-                0x20007d02       0x11 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
+                0x2000803a       0x11 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
  .rodata._printf_i.str1.1
-                0x20007d13       0x22 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x2000804b       0x22 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
  .rodata._ctype_
-                0x20007d35      0x101 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-ctype_.o)
-                0x20007d35                _ctype_
+                0x2000806d      0x101 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-ctype_.o)
+                0x2000806d                _ctype_
  *(.glue_7)
- .glue_7        0x20007e36        0x0 linker stubs
+ .glue_7        0x2000816e        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x20007e36        0x0 linker stubs
-                0x20007e38                . = ALIGN (0x4)
- *fill*         0x20007e36        0x2 
+ .glue_7t       0x2000816e        0x0 linker stubs
+                0x20008170                . = ALIGN (0x4)
+ *fill*         0x2000816e        0x2 
 
-.vfp11_veneer   0x20007e38        0x0
- .vfp11_veneer  0x20007e38        0x0 linker stubs
+.vfp11_veneer   0x20008170        0x0
+ .vfp11_veneer  0x20008170        0x0 linker stubs
 
-.v4_bx          0x20007e38        0x0
- .v4_bx         0x20007e38        0x0 linker stubs
+.v4_bx          0x20008170        0x0
+ .v4_bx         0x20008170        0x0 linker stubs
 
-.iplt           0x20007e38        0x0
- .iplt          0x20007e38        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
+.iplt           0x20008170        0x0
+ .iplt          0x20008170        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
 
-.rel.dyn        0x20007e38        0x0
- .rel.iplt      0x20007e38        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
+.rel.dyn        0x20008170        0x0
+ .rel.iplt      0x20008170        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
 
-.data           0x20007e38      0x838
-                0x20007e38                . = ALIGN (0x4)
+.data           0x20008170      0x8d0
+                0x20008170                . = ALIGN (0x4)
  *(.data)
- .data          0x20007e38        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
- .data          0x20007e38        0x0 ./Debug/driver_src_stm32f4xx_tim.c.o
- .data          0x20007e38        0x0 ./Debug/driver_src_stm32f4xx_dac.c.o
- .data          0x20007e38       0x10 ./Debug/driver_src_stm32f4xx_rcc.c.o
- .data          0x20007e48        0x0 ./Debug/driver_src_stm32f4xx_gpio.c.o
- .data          0x20007e48       0x24 ./Debug/TinyTimber.c.o
-                0x20007e48                hex
-                0x20007e5c                msgPool
-                0x20007e60                threadPool
-                0x20007e64                activeStack
-                0x20007e68                current
- .data          0x20007e6c       0x84 ./Debug/dispatch.s.o
- .data          0x20007ef0        0x0 ./Debug/startup.c.o
- .data          0x20007ef0        0x0 ./Debug/driver_src_stm32f4xx_usart.c.o
- .data          0x20007ef0      0x5b0 ./Debug/application.c.o
-                0x20007ef0                DAC_OUTPUT
-                0x20007ef4                freqind
-                0x20007f74                periods
-                0x20007fd8                s
-                0x20007ff0                b
-                0x20008008                sci0
-                0x20008428                can0
- .data          0x200084a0        0x0 ./Debug/canTinyTimber.c.o
- .data          0x200084a0        0x0 ./Debug/sciTinyTimber.c.o
- .data          0x200084a0        0x0 ./Debug/driver_src_stm32f4xx_syscfg.c.o
- .data          0x200084a0        0x0 ./Debug/driver_src_stm32f4xx_can.c.o
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strcmp.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-ctype_.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memchr.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
- .data          0x200084a0        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
+ .data          0x20008170        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
+ .data          0x20008170        0x0 ./Debug/driver_src_stm32f4xx_tim.c.o
+ .data          0x20008170        0x0 ./Debug/driver_src_stm32f4xx_dac.c.o
+ .data          0x20008170       0x10 ./Debug/driver_src_stm32f4xx_rcc.c.o
+ .data          0x20008180        0x0 ./Debug/driver_src_stm32f4xx_gpio.c.o
+ .data          0x20008180       0x24 ./Debug/TinyTimber.c.o
+                0x20008180                hex
+                0x20008194                msgPool
+                0x20008198                threadPool
+                0x2000819c                activeStack
+                0x200081a0                current
+ .data          0x200081a4       0x84 ./Debug/dispatch.s.o
+ .data          0x20008228        0x0 ./Debug/startup.c.o
+ .data          0x20008228        0x0 ./Debug/driver_src_stm32f4xx_usart.c.o
+ .data          0x20008228      0x648 ./Debug/application.c.o
+                0x20008228                DAC_OUTPUT
+                0x2000822c                freqind
+                0x200082ac                periods
+                0x20008310                beats
+                0x20008390                s
+                0x200083b4                b
+                0x200083d8                sci0
+                0x200087f8                can0
+ .data          0x20008870        0x0 ./Debug/canTinyTimber.c.o
+ .data          0x20008870        0x0 ./Debug/sciTinyTimber.c.o
+ .data          0x20008870        0x0 ./Debug/driver_src_stm32f4xx_syscfg.c.o
+ .data          0x20008870        0x0 ./Debug/driver_src_stm32f4xx_can.c.o
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strcmp.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-ctype_.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memchr.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
+ .data          0x20008870        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
  *(.data.*)
  .data._impure_ptr
-                0x200084a0        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
-                0x200084a0                _impure_ptr
+                0x20008870        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
+                0x20008870                _impure_ptr
  .data.impure_data
-                0x200084a4       0x60 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
+                0x20008874       0x60 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
  .data.__global_locale
-                0x20008504      0x16c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
-                0x20008504                __global_locale
-                0x20008670                . = ALIGN (0x4)
+                0x200088d4      0x16c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x200088d4                __global_locale
+                0x20008a40                . = ALIGN (0x4)
 
-.igot.plt       0x20008670        0x0
- .igot.plt      0x20008670        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
+.igot.plt       0x20008a40        0x0
+ .igot.plt      0x20008a40        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
 
-.bss            0x20008670     0x842c
-                0x20008670                . = ALIGN (0x4)
-                0x20008670                _sbss = .
+.bss            0x20008a40     0x843c
+                0x20008a40                . = ALIGN (0x4)
+                0x20008a40                _sbss = .
  *(.bss)
- .bss           0x20008670        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
- .bss           0x20008670        0x0 ./Debug/driver_src_stm32f4xx_tim.c.o
- .bss           0x20008670        0x0 ./Debug/driver_src_stm32f4xx_dac.c.o
- .bss           0x20008670        0x0 ./Debug/driver_src_stm32f4xx_rcc.c.o
- .bss           0x20008670        0x0 ./Debug/driver_src_stm32f4xx_gpio.c.o
- .bss           0x20008670       0x18 ./Debug/TinyTimber.c.o
-                0x20008670                doIRQSchedule
-                0x20008674                msgQ
-                0x20008678                timerQ
-                0x2000867c                runAsHardware
-                0x20008680                timestamp
-                0x20008684                overflows
- .bss           0x20008688        0x0 ./Debug/dispatch.s.o
- .bss           0x20008688        0x0 ./Debug/startup.c.o
- .bss           0x20008688        0x0 ./Debug/driver_src_stm32f4xx_usart.c.o
- .bss           0x20008688       0xac ./Debug/application.c.o
-                0x20008688                app
- .bss           0x20008734        0x0 ./Debug/canTinyTimber.c.o
- .bss           0x20008734        0x0 ./Debug/sciTinyTimber.c.o
- .bss           0x20008734        0x0 ./Debug/driver_src_stm32f4xx_syscfg.c.o
- .bss           0x20008734        0x0 ./Debug/driver_src_stm32f4xx_can.c.o
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strcmp.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-ctype_.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memchr.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
- .bss           0x20008734        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
+ .bss           0x20008a40        0x0 ./Debug/driver_src_stm32f4xx_exti.c.o
+ .bss           0x20008a40        0x0 ./Debug/driver_src_stm32f4xx_tim.c.o
+ .bss           0x20008a40        0x0 ./Debug/driver_src_stm32f4xx_dac.c.o
+ .bss           0x20008a40        0x0 ./Debug/driver_src_stm32f4xx_rcc.c.o
+ .bss           0x20008a40        0x0 ./Debug/driver_src_stm32f4xx_gpio.c.o
+ .bss           0x20008a40       0x18 ./Debug/TinyTimber.c.o
+                0x20008a40                doIRQSchedule
+                0x20008a44                msgQ
+                0x20008a48                timerQ
+                0x20008a4c                runAsHardware
+                0x20008a50                timestamp
+                0x20008a54                overflows
+ .bss           0x20008a58        0x0 ./Debug/dispatch.s.o
+ .bss           0x20008a58        0x0 ./Debug/startup.c.o
+ .bss           0x20008a58        0x0 ./Debug/driver_src_stm32f4xx_usart.c.o
+ .bss           0x20008a58       0xb8 ./Debug/application.c.o
+                0x20008a58                app
+                0x20008b04                m
+ .bss           0x20008b10        0x0 ./Debug/canTinyTimber.c.o
+ .bss           0x20008b10        0x0 ./Debug/sciTinyTimber.c.o
+ .bss           0x20008b10        0x0 ./Debug/driver_src_stm32f4xx_syscfg.c.o
+ .bss           0x20008b10        0x0 ./Debug/driver_src_stm32f4xx_can.c.o
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-impure.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strcmp.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-ctype_.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memchr.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
+ .bss           0x20008b10        0x0 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
  *(.bss.*)
  .bss._PathLocale
-                0x20008734        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
-                0x20008734                _PathLocale
+                0x20008b10        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+                0x20008b10                _PathLocale
  .bss.__malloc_free_list
-                0x20008738        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
-                0x20008738                __malloc_free_list
+                0x20008b14        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+                0x20008b14                __malloc_free_list
  .bss.__malloc_sbrk_start
-                0x2000873c        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
-                0x2000873c                __malloc_sbrk_start
+                0x20008b18        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+                0x20008b18                __malloc_sbrk_start
  *(COMMON)
- COMMON         0x20008740     0x8358 ./Debug/TinyTimber.c.o
-                0x20008740                otable
-                0x2000874c                upcoming
-                0x20008750                threads
-                0x200087a0                mtable
-                0x200087ac                thread0
-                0x200087c0                messages
-                0x20008a90                __heap_end
-                0x20008a98                stacks
- COMMON         0x20010a98        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
-                0x20010a98                errno
-                0x20010a9c                . = ALIGN (0x4)
-                0x20010a9c                _ebss = .
-                0x20010a9c                PROVIDE (end, _ebss)
+ *fill*         0x20008b1c        0x4 
+ COMMON         0x20008b20     0x8358 ./Debug/TinyTimber.c.o
+                0x20008b20                otable
+                0x20008b2c                upcoming
+                0x20008b30                threads
+                0x20008b80                mtable
+                0x20008b8c                thread0
+                0x20008ba0                messages
+                0x20008e70                __heap_end
+                0x20008e78                stacks
+ COMMON         0x20010e78        0x4 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
+                0x20010e78                errno
+                0x20010e7c                . = ALIGN (0x4)
+                0x20010e7c                _ebss = .
+                0x20010e7c                PROVIDE (end, _ebss)
                 [!provide]                PROVIDE (_end, _ebss)
 OUTPUT(./Debug/RTS-Lab.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x9c8b
+.debug_info     0x00000000     0x9ec1
  .debug_info    0x00000000      0x354 ./Debug/driver_src_stm32f4xx_exti.c.o
  .debug_info    0x00000354     0x1c6f ./Debug/driver_src_stm32f4xx_tim.c.o
  .debug_info    0x00001fc3      0x64f ./Debug/driver_src_stm32f4xx_dac.c.o
@@ -713,13 +720,13 @@ OUTPUT(./Debug/RTS-Lab.elf elf32-littlearm)
  .debug_info    0x00003a5c     0x1745 ./Debug/TinyTimber.c.o
  .debug_info    0x000051a1      0xa47 ./Debug/startup.c.o
  .debug_info    0x00005be8      0x9d0 ./Debug/driver_src_stm32f4xx_usart.c.o
- .debug_info    0x000065b8     0x120c ./Debug/application.c.o
- .debug_info    0x000077c4      0xd0e ./Debug/canTinyTimber.c.o
- .debug_info    0x000084d2      0x96d ./Debug/sciTinyTimber.c.o
- .debug_info    0x00008e3f      0x2a2 ./Debug/driver_src_stm32f4xx_syscfg.c.o
- .debug_info    0x000090e1      0xbaa ./Debug/driver_src_stm32f4xx_can.c.o
+ .debug_info    0x000065b8     0x1442 ./Debug/application.c.o
+ .debug_info    0x000079fa      0xd0e ./Debug/canTinyTimber.c.o
+ .debug_info    0x00008708      0x96d ./Debug/sciTinyTimber.c.o
+ .debug_info    0x00009075      0x2a2 ./Debug/driver_src_stm32f4xx_syscfg.c.o
+ .debug_info    0x00009317      0xbaa ./Debug/driver_src_stm32f4xx_can.c.o
 
-.debug_abbrev   0x00000000     0x1b79
+.debug_abbrev   0x00000000     0x1c0c
  .debug_abbrev  0x00000000      0x1c0 ./Debug/driver_src_stm32f4xx_exti.c.o
  .debug_abbrev  0x000001c0      0x19c ./Debug/driver_src_stm32f4xx_tim.c.o
  .debug_abbrev  0x0000035c      0x193 ./Debug/driver_src_stm32f4xx_dac.c.o
@@ -728,11 +735,11 @@ OUTPUT(./Debug/RTS-Lab.elf elf32-littlearm)
  .debug_abbrev  0x0000087c      0x47b ./Debug/TinyTimber.c.o
  .debug_abbrev  0x00000cf7      0x255 ./Debug/startup.c.o
  .debug_abbrev  0x00000f4c      0x184 ./Debug/driver_src_stm32f4xx_usart.c.o
- .debug_abbrev  0x000010d0      0x2b1 ./Debug/application.c.o
- .debug_abbrev  0x00001381      0x256 ./Debug/canTinyTimber.c.o
- .debug_abbrev  0x000015d7      0x252 ./Debug/sciTinyTimber.c.o
- .debug_abbrev  0x00001829      0x148 ./Debug/driver_src_stm32f4xx_syscfg.c.o
- .debug_abbrev  0x00001971      0x208 ./Debug/driver_src_stm32f4xx_can.c.o
+ .debug_abbrev  0x000010d0      0x344 ./Debug/application.c.o
+ .debug_abbrev  0x00001414      0x256 ./Debug/canTinyTimber.c.o
+ .debug_abbrev  0x0000166a      0x252 ./Debug/sciTinyTimber.c.o
+ .debug_abbrev  0x000018bc      0x148 ./Debug/driver_src_stm32f4xx_syscfg.c.o
+ .debug_abbrev  0x00001a04      0x208 ./Debug/driver_src_stm32f4xx_can.c.o
 
 .debug_aranges  0x00000000      0x1a8
  .debug_aranges
@@ -762,7 +769,7 @@ OUTPUT(./Debug/RTS-Lab.elf elf32-littlearm)
  .debug_aranges
                 0x00000188       0x20 ./Debug/driver_src_stm32f4xx_can.c.o
 
-.debug_line     0x00000000     0x2a58
+.debug_line     0x00000000     0x2aeb
  .debug_line    0x00000000      0x22c ./Debug/driver_src_stm32f4xx_exti.c.o
  .debug_line    0x0000022c      0x60b ./Debug/driver_src_stm32f4xx_tim.c.o
  .debug_line    0x00000837      0x271 ./Debug/driver_src_stm32f4xx_dac.c.o
@@ -771,13 +778,13 @@ OUTPUT(./Debug/RTS-Lab.elf elf32-littlearm)
  .debug_line    0x00001103      0x5ec ./Debug/TinyTimber.c.o
  .debug_line    0x000016ef      0x2be ./Debug/startup.c.o
  .debug_line    0x000019ad      0x350 ./Debug/driver_src_stm32f4xx_usart.c.o
- .debug_line    0x00001cfd      0x325 ./Debug/application.c.o
- .debug_line    0x00002022      0x288 ./Debug/canTinyTimber.c.o
- .debug_line    0x000022aa      0x1df ./Debug/sciTinyTimber.c.o
- .debug_line    0x00002489      0x1b7 ./Debug/driver_src_stm32f4xx_syscfg.c.o
- .debug_line    0x00002640      0x418 ./Debug/driver_src_stm32f4xx_can.c.o
+ .debug_line    0x00001cfd      0x3b8 ./Debug/application.c.o
+ .debug_line    0x000020b5      0x288 ./Debug/canTinyTimber.c.o
+ .debug_line    0x0000233d      0x1df ./Debug/sciTinyTimber.c.o
+ .debug_line    0x0000251c      0x1b7 ./Debug/driver_src_stm32f4xx_syscfg.c.o
+ .debug_line    0x000026d3      0x418 ./Debug/driver_src_stm32f4xx_can.c.o
 
-.debug_str      0x00000000     0x37d6
+.debug_str      0x00000000     0x3852
  .debug_str     0x00000000      0x333 ./Debug/driver_src_stm32f4xx_exti.c.o
                                 0x39c (size before relaxing)
  .debug_str     0x00000333      0xbf3 ./Debug/driver_src_stm32f4xx_tim.c.o
@@ -788,21 +795,21 @@ OUTPUT(./Debug/RTS-Lab.elf elf32-littlearm)
                                 0x9e5 (size before relaxing)
  .debug_str     0x0000194e      0x328 ./Debug/driver_src_stm32f4xx_gpio.c.o
                                 0x4f3 (size before relaxing)
- .debug_str     0x00001c76      0x90a ./Debug/TinyTimber.c.o
+ .debug_str     0x00001c76      0x901 ./Debug/TinyTimber.c.o
                                 0xca3 (size before relaxing)
- .debug_str     0x00002580      0x2a3 ./Debug/startup.c.o
+ .debug_str     0x00002577      0x2a3 ./Debug/startup.c.o
                                 0x7e6 (size before relaxing)
- .debug_str     0x00002823      0x42a ./Debug/driver_src_stm32f4xx_usart.c.o
+ .debug_str     0x0000281a      0x42a ./Debug/driver_src_stm32f4xx_usart.c.o
                                 0x6df (size before relaxing)
- .debug_str     0x00002c4d      0x550 ./Debug/application.c.o
-                                0x8b7 (size before relaxing)
- .debug_str     0x0000319d      0x13e ./Debug/canTinyTimber.c.o
+ .debug_str     0x00002c44      0x5d5 ./Debug/application.c.o
+                                0x94c (size before relaxing)
+ .debug_str     0x00003219      0x13e ./Debug/canTinyTimber.c.o
                                 0xa64 (size before relaxing)
- .debug_str     0x000032db       0x78 ./Debug/sciTinyTimber.c.o
+ .debug_str     0x00003357       0x78 ./Debug/sciTinyTimber.c.o
                                 0x8c3 (size before relaxing)
- .debug_str     0x00003353      0x183 ./Debug/driver_src_stm32f4xx_syscfg.c.o
+ .debug_str     0x000033cf      0x183 ./Debug/driver_src_stm32f4xx_syscfg.c.o
                                 0x35e (size before relaxing)
- .debug_str     0x000034d6      0x300 ./Debug/driver_src_stm32f4xx_can.c.o
+ .debug_str     0x00003552      0x300 ./Debug/driver_src_stm32f4xx_can.c.o
                                 0x78e (size before relaxing)
 
 .comment        0x00000000       0x7e
@@ -894,7 +901,7 @@ OUTPUT(./Debug/RTS-Lab.elf elf32-littlearm)
  .ARM.attributes
                 0x000006f2       0x34 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
 
-.debug_frame    0x00000000     0x355c
+.debug_frame    0x00000000     0x3620
  .debug_frame   0x00000000      0x148 ./Debug/driver_src_stm32f4xx_exti.c.o
  .debug_frame   0x00000148      0xe54 ./Debug/driver_src_stm32f4xx_tim.c.o
  .debug_frame   0x00000f9c      0x2ac ./Debug/driver_src_stm32f4xx_dac.c.o
@@ -903,29 +910,29 @@ OUTPUT(./Debug/RTS-Lab.elf elf32-littlearm)
  .debug_frame   0x00001c98      0x57c ./Debug/TinyTimber.c.o
  .debug_frame   0x00002214      0x14c ./Debug/startup.c.o
  .debug_frame   0x00002360      0x490 ./Debug/driver_src_stm32f4xx_usart.c.o
- .debug_frame   0x000027f0      0x14c ./Debug/application.c.o
- .debug_frame   0x0000293c      0x100 ./Debug/canTinyTimber.c.o
- .debug_frame   0x00002a3c      0x11c ./Debug/sciTinyTimber.c.o
- .debug_frame   0x00002b58      0x11c ./Debug/driver_src_stm32f4xx_syscfg.c.o
- .debug_frame   0x00002c74      0x3f4 ./Debug/driver_src_stm32f4xx_can.c.o
- .debug_frame   0x00003068       0x30 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
- .debug_frame   0x00003098       0x7c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
- .debug_frame   0x00003114       0x84 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
- .debug_frame   0x00003198       0x68 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
- .debug_frame   0x00003200       0x48 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
- .debug_frame   0x00003248       0x90 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
- .debug_frame   0x000032d8       0x60 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
- .debug_frame   0x00003338       0x20 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strcmp.o)
- .debug_frame   0x00003358       0x3c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
- .debug_frame   0x00003394       0x28 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x000033bc       0x28 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
- .debug_frame   0x000033e4       0x38 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x0000341c       0x2c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x00003448       0x3c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
- .debug_frame   0x00003484       0x2c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x000034b0       0x30 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
- .debug_frame   0x000034e0       0x20 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
- .debug_frame   0x00003500       0x5c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x000027f0      0x210 ./Debug/application.c.o
+ .debug_frame   0x00002a00      0x100 ./Debug/canTinyTimber.c.o
+ .debug_frame   0x00002b00      0x11c ./Debug/sciTinyTimber.c.o
+ .debug_frame   0x00002c1c      0x11c ./Debug/driver_src_stm32f4xx_syscfg.c.o
+ .debug_frame   0x00002d38      0x3f4 ./Debug/driver_src_stm32f4xx_can.c.o
+ .debug_frame   0x0000312c       0x30 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-atoi.o)
+ .debug_frame   0x0000315c       0x7c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-snprintf.o)
+ .debug_frame   0x000031d8       0x84 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strtol.o)
+ .debug_frame   0x0000325c       0x68 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-locale.o)
+ .debug_frame   0x000032c4       0x48 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mbtowc_r.o)
+ .debug_frame   0x0000330c       0x90 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
+ .debug_frame   0x0000339c       0x60 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .debug_frame   0x000033fc       0x20 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-strcmp.o)
+ .debug_frame   0x0000341c       0x3c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-wctomb_r.o)
+ .debug_frame   0x00003458       0x28 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00003480       0x28 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memmove.o)
+ .debug_frame   0x000034a8       0x38 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x000034e0       0x2c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x0000350c       0x3c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-reallocr.o)
+ .debug_frame   0x00003548       0x2c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x00003574       0x30 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-mlock.o)
+ .debug_frame   0x000035a4       0x20 c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-msizer.o)
+ .debug_frame   0x000035c4       0x5c c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
 
 .debug_ranges   0x00000000       0x18
  .debug_ranges  0x00000000       0x18 ./Debug/startup.c.o
@@ -967,6 +974,7 @@ CAN_Transmit                                      ./Debug/driver_src_stm32f4xx_c
 CAN_TransmitStatus                                ./Debug/driver_src_stm32f4xx_can.c.o
 CAN_WakeUp                                        ./Debug/driver_src_stm32f4xx_can.c.o
 CURRENT_OFFSET                                    ./Debug/TinyTimber.c.o
+                                                  ./Debug/application.c.o
 DAC_ClearFlag                                     ./Debug/driver_src_stm32f4xx_dac.c.o
 DAC_ClearITPendingBit                             ./Debug/driver_src_stm32f4xx_dac.c.o
 DAC_Cmd                                           ./Debug/driver_src_stm32f4xx_dac.c.o
@@ -1322,6 +1330,9 @@ atoi                                              c:/cseapp/codelite/tools/gcc-a
                                                   ./Debug/application.c.o
 b                                                 ./Debug/application.c.o
 background_generator                              ./Debug/application.c.o
+beats                                             ./Debug/application.c.o
+benchmark_background                              ./Debug/application.c.o
+benchmark_tone                                    ./Debug/application.c.o
 can0                                              ./Debug/application.c.o
 can_init                                          ./Debug/canTinyTimber.c.o
                                                   ./Debug/application.c.o
@@ -1335,6 +1346,7 @@ cleanup_glue                                      c:/cseapp/codelite/tools/gcc-a
 cli                                               ./Debug/TinyTimber.c.o
 current                                           ./Debug/TinyTimber.c.o
                                                   ./Debug/dispatch.s.o
+deadline_control                                  ./Debug/application.c.o
 dequeue                                           ./Debug/TinyTimber.c.o
 dequeue_pool                                      ./Debug/TinyTimber.c.o
 doIRQSchedule                                     ./Debug/TinyTimber.c.o
@@ -1351,9 +1363,12 @@ hex                                               ./Debug/TinyTimber.c.o
 insert                                            ./Debug/TinyTimber.c.o
 install                                           ./Debug/TinyTimber.c.o
                                                   ./Debug/application.c.o
+kill_tone                                         ./Debug/application.c.o
 load_control                                      ./Debug/application.c.o
+m                                                 ./Debug/application.c.o
 main                                              ./Debug/application.c.o
                                                   ./Debug/startup.c.o
+melody_player                                     ./Debug/application.c.o
 memchr                                            c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memchr.o)
                                                   c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-vfprintf_i.o)
                                                   c:/cseapp/codelite/tools/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-nano-svfprintf.o)
