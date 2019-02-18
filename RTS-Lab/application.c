@@ -36,13 +36,15 @@ typedef struct {
 typedef struct {
 	Object super;
 	int key;
+    int tempo;
+    int current_key;
 } Melody;
 
 App app = { initObject(), 0, 0, 0, '\0' };
 
 Sound s = { initObject(), 1136, 5, 0, 0, 100, 100, 0 };
 Sound b = { initObject(), 1300, 5, 0, 1000, 1300, 1300 };
-Melody m = { initObject(), 0 };
+Melody m = { initObject(), 0, 0, 0 };
 
 void tone_generator(Sound *self, int unused);
 void background_generator(Sound *self, int unused);
@@ -171,8 +173,6 @@ void deadline_control(Sound *self, int unused) {
     }
 }
 
-
-
 void background_generator(Sound *self, int unused) {
 	for(int i = 0; i <= self->background_loop_range; i++) {
 
@@ -200,13 +200,13 @@ void benchmark_background() {
         }
     }
     average = average / 500;
-	
+
 	char avBuf[50], maxBuf[50];
 	snprintf(avBuf, 50, "%ld\n", USEC_OF(average));
     snprintf(maxBuf, 50, "%ld\n", USEC_OF(max));
 	SCI_WRITE(&sci0, avBuf);
 	SCI_WRITE(&sci0, maxBuf);
-	
+
 }
 
 void benchmark_tone() {
@@ -227,11 +227,11 @@ void benchmark_tone() {
 		t2 = CURRENT_OFFSET();
 		result = t2 - t1;
 		average += result;
-		if(result > max) 
+		if(result > max)
 			max = result;
     }
 	average = average / 500;
-	
+
 	char avBuf[50], maxBuf[50];
 	snprintf(avBuf, 50, "%ld\n", USEC_OF(average));
     snprintf(maxBuf, 50, "%ld\n", USEC_OF(max));
@@ -260,6 +260,7 @@ void print_periods(int key) {
 }
 
 void tone_generator(Sound *self, int unused) {
+    // Check if tone is killed
 	if(!self->killed) {
 		if(*DAC_OUTPUT) {
 			*DAC_OUTPUT = 0;
@@ -272,29 +273,34 @@ void tone_generator(Sound *self, int unused) {
 	AFTER(USEC(self->period), self, tone_generator, 0);
 }
 
+void melody_player(Melody *self, Sound *sound) {
+
+    // Disable killing of tone
+    sound->killed = 0;
+
+    // Start tone generator
+	ASYNC(sound, tone_generator, 0);
+
+    // After the beat period - 50 kill the current tone
+    AFTER(MSEC(beats[self->count] - 50), sound, kill_tone, 0);
+
+    // After beat period call melody_player again but with new tone
+    AFTER(MSEC(beats[self->count]), self, melody_player, 0);
+
+    // Increment the counting of tone indices
+    self->count = (self->count + 1) % 32;
+
+    //self->key += 10;
+    //sound->period = periods[self->count + sound->key + 10];s
+	//periods[freqind[i] + self->key]
+}
+
 void kill_tone(Sound *self, int unused) {
 	if(self->killed) {
 		self->killed = 0;
 	}
 	else {
 		self->killed = 1;
-	}
-}
-
-void melody_player(Melody *self, int unused) {
-
-	int i;
-	//self->key += 10;
-
-	for(i = 0; i <= 31; i++) {
-		
-		ASYNC(&s, tone_generator, 0);
-		
-		AFTER(MSEC(beats[i] - 50), &s, kill_tone, 0);		
-		AFTER(MSEC(beats[i]), self, melody_player, 0);
-		
-		
-		//periods[freqind[i] + self->key]
 	}
 }
 
@@ -305,9 +311,8 @@ void startApp(App *self, int arg) {
     SCI_INIT(&sci0);
     SCI_WRITE(&sci0, "Hello, hello...\n");
 
+	melody_player(&m, &s);
 
-	melody_player(&m, 0);
-	
     msg.msgId = 1;
     msg.nodeId = 1;
     msg.length = 6;
