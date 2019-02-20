@@ -39,6 +39,7 @@ typedef struct {
 	Object super;
     int tempo;
 	int count;
+	int killed;
 } Melody;
 
 App app = { initObject(), 0, 0, 0, '\0' };
@@ -61,6 +62,9 @@ void kill_tone(Sound *self, int unused);
 void set_tempo(Melody *self, int t);
 void set_key(Sound *self, int key);
 void unkill(Sound *self, int unused);
+void unkill_player(Melody *self, int unused);
+void kill_player(Melody *self, int unused);
+void melody_player(Melody *self, int unused);
 
 Serial sci0 = initSerial(SCI_PORT0, &app, reader);
 
@@ -69,13 +73,26 @@ Can can0 = initCan(CAN_PORT0, &app, receiver);
 void receiver(App *self, int unused) {
     CANMsg msg;
     CAN_RECEIVE(&can0, &msg);
-    SCI_WRITE(&sci0, "Can msg received: ");
-    SCI_WRITE(&sci0, msg.buff);
+	
+	if(msg.buff[0] == 'p') {
+		SCI_WRITE(&sci0, "Can msg received: ");
+		SCI_WRITE(&sci0, msg.buff[0]);
+		unkill_player(&m, 0);
+		ASYNC(&m, melody_player, 0);
+		ASYNC(&s, tone_generator, 0);
+	}
+	else if(msg.buff[0] == 's') {
+		SCI_WRITE(&sci0, "Can msg received: ");
+		SCI_WRITE(&sci0, msg.buff[0]);
+		kill_player(&m, 0);
+	}
+   
 }
 
 void reader(App *self, int c) {
     //SCI_WRITE(&sci0, "Rcv: \'");
 	SCI_WRITECHAR(&sci0, c);
+	CANMsg msg;
 	if(c == 't'){
 
 		self->inpStr[self->count] = '\0';
@@ -125,7 +142,23 @@ void reader(App *self, int c) {
 
 		set_key(&s, key);
 		self->count = 0;
-	}	
+	}
+	else if(c == 'p') {
+		msg.msgId = 1;
+		msg.nodeId = 1;
+		msg.length = 2;
+		msg.buff[0] = 'p';
+		msg.buff[1] = 0;
+		CAN_SEND(&can0, &msg);
+	}
+	else if(c == 's') {
+		msg.msgId = 1;
+		msg.nodeId = 1;
+		msg.length = 2;
+		msg.buff[0] = 's';
+		msg.buff[1] = 0;
+		CAN_SEND(&can0, &msg);
+	}
 	else {
 		self->inpStr[self->count] = c;
 		self->count++;
@@ -134,7 +167,7 @@ void reader(App *self, int c) {
 
 void volume_control(Sound *self, char inp) {
 
-	switch(inp){
+	switch(inp) {
         // UP - increment the volume by one
 		case 'u':
 			if(self->volume < 20)
@@ -239,15 +272,12 @@ void melody_player(Melody *self, int unused) {
     // After the beat period - 50 kill the current tone
     AFTER(MSEC((60000/self->tempo) * beats[self->count] - 100), &s, kill_tone, 0);
 
-    // After beat period call melody_player again but with new tone
-    AFTER(MSEC((60000/self->tempo) * beats[self->count]), self, melody_player, 0);
-
-    // Increment the counting of tone indices
-	self->count = (self->count + 1) % 32;
-
-    //self->key += 10;
-    //sound->period = periods[self->count + sound->key + 10];s
-	//periods[freqind[i] + self->key]
+	if(!self->killed) {
+		// After beat period call melody_player again but with new tone
+		AFTER(MSEC((60000/self->tempo) * beats[self->count]), self, melody_player, 0);
+		// Increment the counting of tone indices
+		self->count = (self->count + 1) % 32;
+	}
 }
 
 void unkill(Sound *self, int unused) {
@@ -263,27 +293,22 @@ void kill_tone(Sound *self, int unused) {
 	}
 }
 
+void kill_player(Melody *self, int unused) {
+	self->killed = 1;
+}
+
+void unkill_player(Melody *self, int unused) {
+	self->killed = 0;
+}
+
 void startApp(App *self, int arg) {
-    CANMsg msg;
 
     CAN_INIT(&can0);
     SCI_INIT(&sci0);
-    SCI_WRITE(&sci0, "Hello, hello...\n");
+    //SCI_WRITE(&sci0, "Hello, hello...\n");
 
-	ASYNC(&m, melody_player, 0);
-	ASYNC(&s, tone_generator, 0);
-
-
-    msg.msgId = 1;
-    msg.nodeId = 1;
-    msg.length = 6;
-    msg.buff[0] = 'H';
-    msg.buff[1] = 'e';
-    msg.buff[2] = 'l';
-    msg.buff[3] = 'l';
-    msg.buff[4] = 'o';
-    msg.buff[5] = 0;
-    CAN_SEND(&can0, &msg);
+	//ASYNC(&m, melody_player, 0);
+	//ASYNC(&s, tone_generator, 0);
 }
 
 int main() {
