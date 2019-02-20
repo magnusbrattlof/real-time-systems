@@ -205,6 +205,85 @@ void background_generator(Sound *self, int unused) {
 	SEND(USEC(self->period), USEC(self->deadline), self, background_generator, 0);
 }
 
+void benchmark_background() {
+    int i, j;
+    Time t1, t2, result;
+    Time max = 0;
+    Time average = 0;
+
+    for(i = 0; i < 500; i++) {
+        t1 = CURRENT_OFFSET();
+        for(j = 0; j < 12500; j++) {
+            // EMPTY LOOP
+        }
+        t2 = CURRENT_OFFSET();
+        result = t2 - t1;
+        average += result;
+
+        if(result > max) {
+            max = result;
+        }
+    }
+    average = average / 500;
+
+	char avBuf[50], maxBuf[50];
+	snprintf(avBuf, 50, "%ld\n", USEC_OF(average));
+    snprintf(maxBuf, 50, "%ld\n", USEC_OF(max));
+	SCI_WRITE(&sci0, avBuf);
+	SCI_WRITE(&sci0, maxBuf);
+
+}
+
+void benchmark_tone() {
+    int i, j;
+	Time t1, t2, result;
+	Time max = 0;
+    Time average = 0;
+    for(i = 0; i < 500; i++) {
+		t1 = CURRENT_OFFSET();
+		for(j = 0; j < 1000; j++) {
+			if(*DAC_OUTPUT) {
+				*DAC_OUTPUT = 0;
+			}
+			else {
+				*DAC_OUTPUT = 5;
+			}
+		}
+		t2 = CURRENT_OFFSET();
+		result = t2 - t1;
+		average += result;
+		if(result > max)
+			max = result;
+    }
+	average = average / 500;
+
+	char avBuf[50], maxBuf[50];
+	snprintf(avBuf, 50, "%ld\n", USEC_OF(average));
+    snprintf(maxBuf, 50, "%ld\n", USEC_OF(max));
+	SCI_WRITE(&sci0, avBuf);
+	SCI_WRITE(&sci0, maxBuf);
+}
+
+
+void print_periods(int key) {
+
+	int i;
+	int new_num;
+	char number[50];
+	char bufIndex[50];
+	key += 10;
+
+	for(i = 0; i <= 31; i++) {
+		new_num = periods[freqind[i] + key];
+		snprintf(number, 50, "%d\t", new_num);
+		snprintf(bufIndex, 50, "%d\n", freqind[i]);
+
+		SCI_WRITE(&sci0, bufIndex);
+		SCI_WRITE(&sci0,  number);
+
+	}
+}
+
 void tone_generator(Sound *self, int unused) {
     // Check if tone is killed
 	if(!self->killed) {
