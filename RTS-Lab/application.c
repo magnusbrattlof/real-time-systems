@@ -54,81 +54,80 @@ Sound s = { initObject(), 1136, 10, 0, 0, 100, 100, 0 };
 Sound b = { initObject(), 1300, 5, 0, 1000, 1300, 1300 };
 Melody m = { initObject(), 120, 0};
 
+/*********************************** Function and method delcaration ***********************************/
 void tone_generator(Sound *self, int unused);
 void background_generator(Sound *self, int unused);
 void load_control(Sound *self, char inp);
 void deadline_control(Sound *self, int unused);
 void volume_control(Sound *self, char inp);
 void key_control(Sound *self, char inp);
-void tempo_control(Melody *self, int tempo);
 void print_periods(int key);
 void reader(App*, int);
 void receiver(App*, int);
 void kill_tone(Sound *self, int unused);
 void set_tempo(Melody *self, int t);
 void set_key(Sound *self, int key);
+void set_period(Sound *self, int p);
 void unkill(Sound *self, int unused);
 void unkill_player(Melody *self, int unused);
 void kill_player(Melody *self, int unused);
 void melody_player(Melody *self, int unused);
 void prepare_can_msg(CANMsg *self, int value);
 void start_player(Melody *self, int unused);
+void canon_controler(Melody *self, int unused);
+void canon_send(CANMsg *self, int unused);
 
 Serial sci0 = initSerial(SCI_PORT0, &app, reader);
-
 Can can0 = initCan(CAN_PORT0, &app, receiver);
 
-void start_player(Melody *self, int unused) {
-	unkill_player(self, 0);
-	if(self->started) {
-		ASYNC(self, melody_player, 0);
-	}
-	else {
-		ASYNC(&s, tone_generator, 0);
-		ASYNC(self, melody_player, 0);
-	}
-}
-
+/* The recevier method for the CAN bus */
 void receiver(App *self, int unused) {
     CANMsg msg;
     CAN_RECEIVE(&can0, &msg);
+	
 	if(!LEADER) {
-		if(msg.msgId == START) {
-			start_player(&m, 0);
-		}
-		else if(msg.msgId == STOP) {
-			kill_player(&m, 0);
-		}
-		else if(msg.msgId == KEY) {
-			int key = msg.buff[0];
-			set_key(&s, key);
-		}
-		else if(msg.msgId == TEMPO) {
-			int tempo = msg.buff[0];
-			set_tempo(&m, tempo);
-		}
-		else if(msg.msgId == VOLUME) {
-			switch(msg.buff[0]) {
-				case 0:
-					volume_control(&s, 'd');
-				case 1:
-					volume_control(&s, 'u');
-				default:
-					SCI_WRITE(&sci0, "Blabla ");
+		if(msg.nodeId == 2 || msg.nodeId == 0) {
+			if(msg.msgId == START) {
+				SYNC(&m, start_player, 0);
 			}
-			SCI_WRITE(&sci0, "Can msg received: ");
-			SCI_WRITECHAR(&sci0, msg.msgId);
-			SCI_WRITE(&sci0,"\n");
+			else if(msg.msgId == STOP) {
+				SYNC(&m, kill_player, 0);
+			}
+			else if(msg.msgId == KEY) {
+				int key = msg.buff[0];
+				SYNC(&s, set_key, key);
+			}
+			else if(msg.msgId == TEMPO) {
+				int tempo = msg.buff[0];
+				SYNC(&m, set_tempo, tempo);
+			}
+			else if(msg.msgId == VOLUME) {
+				switch(msg.buff[0]) {
+					case 0:
+						SYNC(&s, volume_control, 'd');
+					case 1:
+						SYNC(&s, volume_control, 'u');
+					default:
+						SCI_WRITE(&sci0, "Default ");
+				}
+				SCI_WRITE(&sci0, "Can msg received: ");
+				SCI_WRITECHAR(&sci0, msg.msgId);
+				SCI_WRITE(&sci0,"\n");
+			}
 		}
 	}
 }
 
+/*********************************** Reader for controlling the keyboad ***********************************/
+
+/* This is the function that handles keyboard inputs */
 void reader(App *self, int c) {
-    //SCI_WRITE(&sci0, "Rcv: \'");
+
 	SCI_WRITECHAR(&sci0, c);
 	SCI_WRITE(&sci0,"\n");
 	CANMsg msg;
 	
+	// Controlling the tempo
 	if(c == 't') {
 		self->inpStr[self->count] = '\0';
 		int tempo = atoi(self->inpStr);
@@ -150,14 +149,14 @@ void reader(App *self, int c) {
 		
 		msg.msgId = '3';
 		msg.nodeId = 1;
-		//SYNC(&m, tempo_control, tempo);
 		CAN_SEND(&can0, &msg);
 		
 		if(LEADER) {
-			set_tempo(&m, tempo);
+			SYNC(&m, set_tempo, tempo);
 		}
 	}
 	
+	// Controlling the key 
 	else if (c == 'k') {
 		
 		self->inpStr[self->count] = '\0';
@@ -180,20 +179,17 @@ void reader(App *self, int c) {
 		self->count = 0;
 		CAN_SEND(&can0, &msg);
 		if(LEADER) {
-			set_key(&s, key);
+			SYNC(&s, set_key, key);
 		}
 	}
 	else if(c == 'p') {
-		
-		msg.msgId = '5';
-		msg.nodeId = 1;
-		msg.length = 1;
-		msg.buff[0] = 0;
-		CAN_SEND(&can0, &msg);
 		if(LEADER) {
-			start_player(&m, 0);
+			SYNC(&m, start_player, 0);
+			SYNC(&m, canon_controler, 0);
 		}
 	}
+	
+	// Controlling the stop
 	else if(c == 's') {
 
 		msg.msgId = '6';
@@ -202,10 +198,11 @@ void reader(App *self, int c) {
 		msg.buff[0] = 0;
 		CAN_SEND(&can0, &msg);
 		if(LEADER) {
-			kill_player(&m, 0);
+			SYNC(&m, kill_player, 0);
 		}
 	}
 
+	// Set the leader mode
 	else if(c == 'l') {
 		if(LEADER) {
 			LEADER = 0;
@@ -214,7 +211,8 @@ void reader(App *self, int c) {
 			LEADER = 1;
 		}
 	}
-
+	
+/****************************** Old controlling functions ******************************/
 	else if(c == 'F') {
 		self->runSum = 0;
 		SCI_WRITE(&sci0, "<The running sum is 0\n");
@@ -243,6 +241,122 @@ void reader(App *self, int c) {
 	}
 }
 
+/*********************************** Melody and tone generators ***********************************/
+
+/* This is the tone gernerator mehod */
+void tone_generator(Sound *self, int unused) {
+   
+	// Check if tone is killed
+	if(!self->killed) {
+		if(*DAC_OUTPUT) {
+			*DAC_OUTPUT = 0;
+		}
+		else {
+			*DAC_OUTPUT = self->volume;
+		}
+	}
+	// After the correct period we call this tone_generator again
+	AFTER(USEC(self->period), self, tone_generator, 0);
+}
+
+/* This is the melody player that controls the tone_generator, giving it the correct beat */
+void melody_player(Melody *self, int unused) {
+
+	// Used for starting and stopping the player
+	self->started = 1;
+	
+	// If user has pressed the stop button, won't play anymore
+	if(!self->killed) {
+
+		// Disable killing of tone
+		unkill(&s, 0);
+		set_period(&s, self->count);
+		
+		// After the beat period - 50 kill the current tone
+		AFTER(MSEC((60000/self->tempo) * beats[self->count] - 50), &s, kill_tone, 0);
+
+		// After beat period call melody_player again but with new tone
+		AFTER(MSEC((60000/self->tempo) * beats[self->count]), self, melody_player, 0);
+		
+		// Increment the counting of tone indices
+		self->count = (self->count + 1) % 32;
+	}
+}
+
+/*********************************** Methods for controlling ***********************************/
+
+void start_player(Melody *self, int unused) {
+	SYNC(self, unkill_player, 0);
+	
+	if(self->started) {
+		SYNC(self, melody_player, 0);
+	}
+	else {
+		SYNC(&s, tone_generator, 0);
+		SYNC(self, melody_player, 0);
+	}
+}
+
+void set_period(Sound *self, int p) {
+	self->period = periods[freqind[p] + self->key + 10];
+}
+	
+void set_key(Sound *self, int k){
+	self->key = k - 5;
+}
+
+void set_tempo(Melody *self, int t) {
+	self->tempo = t;
+}
+
+/* This was ment to control the canon of the system */
+void canon_controler(Melody *self, int unused) {
+	// Initializing the variables for delays and can msg
+	int delay_board1;
+	int delay_board2;
+	CANMsg msg;
+
+	msg.msgId = 0;
+	msg.nodeId = 1;
+	msg.length = 1;
+	msg.buff[0] = 0;
+
+	// Calculate the delays for the other slave boards
+	delay_board1 = (60000/self->tempo) * (beats[self->count] * 8) - 50;
+	delay_board2 = (60000/self->tempo) * (beats[self->count] * 4) - 50;
+	
+	// Start the tone generator on the other boards
+	AFTER(MSEC(delay_board1), &msg, canon_send, 0);
+	AFTER(MSEC(delay_board2), &msg, canon_send, 0);
+}
+
+/* Method for sending out can message */
+void canon_send(CANMsg *self, int unused) {
+	CAN_SEND(&can0, self);
+}
+
+/* Method for unkilling the tone generator */
+void unkill(Sound *self, int unused) {
+	self->killed = 0;
+}
+
+/* Method for killing the tone generator */
+void kill_tone(Sound *self, int unused) {
+	self->killed = 1;
+}
+
+/* Method for killing the melody player */
+void kill_player(Melody *self, int unused) {
+	self->killed = 1;
+	self->count = 0;
+	kill_tone(&s, 0);
+}
+
+/* Method for unkilling the melody player */
+void unkill_player(Melody *self, int unused) {
+	self->killed = 0;
+}
+
 void volume_control(Sound *self, char inp) {
 
 	switch(inp) {
@@ -268,6 +382,8 @@ void volume_control(Sound *self, char inp) {
 			SCI_WRITE(&sci0, "Enter another character.\n");
 		}
 }
+
+/*********************************** Functions and methods for background and old stuff ***********************************/
 
 void load_control(Sound *self, char inp) {
 	char new_blr[50];
@@ -302,13 +418,6 @@ void deadline_control(Sound *self, int unused) {
     }
 }
 
-void tempo_control(Melody *self, int tempo) {
-	if(tempo > 0)
-		set_tempo(self, tempo);
-	else
-		SCI_WRITE(&sci0, "Tempo out of bounds [60, 240]\n");
-}
-
 void background_generator(Sound *self, int unused) {
 	for(int i = 0; i <= self->background_loop_range; i++) {
 
@@ -316,79 +425,20 @@ void background_generator(Sound *self, int unused) {
 	SEND(USEC(self->period), USEC(self->deadline), self, background_generator, 0);
 }
 
-void tone_generator(Sound *self, int unused) {
-    // Check if tone is killed
-	if(!self->killed) {
-		if(*DAC_OUTPUT) {
-			*DAC_OUTPUT = 0;
-		}
-		else {
-			*DAC_OUTPUT = self->volume;
-		}
-	}
-	AFTER(USEC(self->period), self, tone_generator, 0);
-}
-void set_period(Sound *self, int p){
-	self->period = periods[freqind[p] + self->key + 10];
-}
-	
-void set_key(Sound *self, int k){
-	self->key = k - 5;
-}
+/*********************************** Starting methods for the system ***********************************/
 
-void set_tempo(Melody *self, int t) {
-	self->tempo = t;
-}
-
-void melody_player(Melody *self, int unused) {
-
-	self->started = 1;
-	
-	if(!self->killed) {
-		
-		// Disable killing of tone
-		unkill(&s, 0);
-		set_period(&s, self->count);
-		
-		// After the beat period - 50 kill the current tone
-		AFTER(MSEC((60000/self->tempo) * beats[self->count] - 50), &s, kill_tone, 0);
-
-	
-		// After beat period call melody_player again but with new tone
-		AFTER(MSEC((60000/self->tempo) * beats[self->count]), self, melody_player, 0);
-		// Increment the counting of tone indices
-		self->count = (self->count + 1) % 32;
-	}
-}
-
-void unkill(Sound *self, int unused) {
-	self->killed = 0;
-}
-
-void kill_tone(Sound *self, int unused) {
-	self->killed = 1;
-}
-
-void kill_player(Melody *self, int unused) {
-	self->killed = 1;
-	self->count = 0;
-	kill_tone(&s, 0);
-}
-
-void unkill_player(Melody *self, int unused) {
-	self->killed = 0;
-}
-
+/* Main method for starting the system */
 void startApp(App *self, int arg) {
 
     CAN_INIT(&can0);
     SCI_INIT(&sci0);
+	
     //SCI_WRITE(&sci0, "Hello, hello...\n");
-
 	//ASYNC(&m, melody_player, 0);
 	//ASYNC(&s, tone_generator, 0);
 }
 
+/* Main function for installing interrupt handerls and starting TinyTimber*/
 int main() {
     INSTALL(&sci0, sci_interrupt, SCI_IRQ0);
 	INSTALL(&can0, can_interrupt, CAN_IRQ0);
